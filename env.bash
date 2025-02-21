@@ -11,10 +11,12 @@ export bin_path=$working_dir/$bin_dir
 
 export build_type=debug
 
+export SERVER_PORT_NUMBER=8080
+
 function build()
 {
-  cmake -B $build_path 
-  cmake --build $build_dir --config $build_type --parallel
+  cmake -B $build_path -DCMAKE_BUILD_TYPE=$build_type
+  cmake --build $build_dir --parallel
 }
 
 function build_run()

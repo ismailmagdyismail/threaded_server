@@ -7,9 +7,13 @@ set(CXX_STANDARD_REQUIRED 17)
 set(src_path $ENV{src_path})
 set(bin_path $ENV{bin_path})
 
+include_directories(${src_path})
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_path})
 
 add_executable(
   WEB_SERVER
   ${src_path}/main.cpp
+  ${src_path}/sockets/ServerSocket.cpp
+  ${src_path}/sockets/ClientSocket.cpp
 )
