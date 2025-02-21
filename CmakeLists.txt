@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.17)
+
+project(WEB_SERVER)
+
+set(CXX_STANDARD_REQUIRED 17)
+
+set(src_path $ENV{src_path})
+set(bin_path $ENV{bin_path})
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_path})
+
+add_executable(
+  WEB_SERVER
+  ${src_path}/main.cpp
+)
