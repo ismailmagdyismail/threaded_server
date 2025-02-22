@@ -16,7 +16,6 @@ add_library(
   ${src_path}/lib/PassiveSocket.cpp
   ${src_path}/lib/ActiveSocket.cpp
   ${src_path}/lib/Socket.cpp
-  ${src_path}/lib/SocketReceptionThread.cpp
 )
 
 target_include_directories(sockets PUBLIC ${src_path}/lib)

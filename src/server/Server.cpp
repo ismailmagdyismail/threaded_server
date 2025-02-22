@@ -12,7 +12,7 @@ std::shared_ptr<Server> Server::Instance()
   return g_pServer;
 }
 
-Server::Server() : m_oServerStatusReceptionThread(portNumber)
+Server::Server() : m_oServerStatusReceptionThread(portNumber, m_oThreadPool)
 {
 }
 
