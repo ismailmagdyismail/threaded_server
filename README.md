@@ -20,7 +20,7 @@
 - buildClient (common files used by both client and server) : `build_client`
 - buildServer (common files used by both client and server) : `build_server`
 
-## running projet
+## Running projet
 
 - NOTE: only one server can be running at any time
 - `run` , will display which process to run 1-Client , 2- Server
