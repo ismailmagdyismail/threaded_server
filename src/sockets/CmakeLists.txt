@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.17)
+
+project(SOCKETS)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(src_path $ENV{src_path})
+set(bin_path $ENV{bin_path})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${bin_path})
+
+include_directories(${src_path}/sockets)
+
+add_library(
+  sockets
+  ${src_path}/sockets/ServerSocket.cpp
+  ${src_path}/sockets/ClientSocket.cpp
+  ${src_path}/sockets/Socket.cpp
+)
+
+target_include_directories(sockets PUBLIC ${src_path}/sockets)

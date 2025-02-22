@@ -1,5 +1,6 @@
 //! ClientSocket Wrapper
-#include "sockets/ClientSocket.hpp"
+#include "ClientSocket.hpp"
+#include "Socket.hpp"
 
 #include <sys/socket.h>
 #include <unistd.h>
@@ -11,12 +12,12 @@
 
 ClientSocket::ClientSocket()
 {
-  m_iSocketFd = socket(AF_INET, SOCK_STREAM, TCP);
+  m_oSocket.m_iSocketFd = socket(AF_INET, SOCK_STREAM, TCP);
 }
 
 ClientSocket::ClientSocket(int p_iSocketFd)
 {
-  m_iSocketFd = p_iSocketFd;
+  m_oSocket.m_iSocketFd = p_iSocketFd;
 }
 
 bool ClientSocket::Connect(int p_iPortNumber, const char *p_pIPAddress)
@@ -25,13 +26,23 @@ bool ClientSocket::Connect(int p_iPortNumber, const char *p_pIPAddress)
   address.sin_family = AF_INET;
   address.sin_port = htons(p_iPortNumber);
   address.sin_addr.s_addr = htonl(INADDR_ANY);
-  int iStatus = connect(m_iSocketFd, (sockaddr *)&address, sizeof address);
+  int iStatus = connect(m_oSocket.m_iSocketFd, (sockaddr *)&address, sizeof address);
   return (-1 != iStatus);
+}
+
+void ClientSocket::Send(const std::string &message)
+{
+  m_oSocket.Send(m_oSocket.m_iSocketFd, message);
+}
+
+std::string ClientSocket::Recieve()
+{
+  return m_oSocket.Recieve(m_oSocket.m_iSocketFd);
 }
 
 void ClientSocket::Close()
 {
-  close(m_iSocketFd);
+  close(m_oSocket.m_iSocketFd);
 }
 
 ClientSocket::~ClientSocket()

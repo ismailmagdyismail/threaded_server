@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.17)
+
+project(CLIENT)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(src_path $ENV{src_path})
+set(bin_path $ENV{bin_path})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_path})
+
+include_directories(${src_path}/sockets)
+include_directories(${src_path}/client)
+
+add_executable(
+  CLIENT
+  ${src_path}/client/main.cpp
+)
+
+target_link_libraries(CLIENT PUBLIC ${bin_path}/libsockets.a)
