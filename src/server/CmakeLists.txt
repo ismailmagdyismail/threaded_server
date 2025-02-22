@@ -9,7 +9,7 @@ set(src_path $ENV{src_path})
 set(bin_path $ENV{bin_path})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_path})
 
-include_directories(${src_path}/sockets)
+include_directories(${src_path}/lib)
 include_directories(${src_path}/server)
 
 add_executable(

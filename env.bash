@@ -19,21 +19,21 @@ export SERVER_PORT_NUMBER=8080
 function build_lib()
 {
   create_artifacts_dir
-  cmake -S $src_path/sockets -B $build_path/lib -DCMAKE_BUILD_TYPE=$build_type
+  cmake -S $src_path/lib -B $build_path/lib -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=$build_type
   cmake --build $build_dir/lib --parallel
 }
 
 function build_server()
 {
   create_artifacts_dir
-  cmake -S $src_path/server -B $build_path/server -DCMAKE_BUILD_TYPE=$build_type
+  cmake -S $src_path/server -B $build_path/server -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=$build_type
   cmake --build $build_dir/server --parallel
 }
 
 function build_client()
 {
   create_artifacts_dir
-  cmake -S $src_path/client -B $build_path/client -DCMAKE_BUILD_TYPE=$build_type
+  cmake -S $src_path/client -B $build_path/client -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=$build_type
   cmake --build $build_dir/client --parallel
 }
 

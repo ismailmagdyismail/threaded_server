@@ -1,10 +1,17 @@
 #include <sys/socket.h>
+#include <iostream>
+#include <unistd.h>
 
 //! Socket Wrapper
 #include "Socket.hpp"
 
 #define FLAGS 0
 #define CHUNK_SIZE 1024
+#define DISCONNECTED_MESSAGE "DISCONNECT"
+
+// Socket::Socket(std::function<void(void)> p_fDisconnectCallback) : m_fDisconnectCallback(p_fDisconnectCallback)
+// {
+// }
 
 void Socket::Send(int p_iSocketFd, const std::string &message)
 {
@@ -42,4 +49,9 @@ std::string Socket::Recieve(int p_iSocketFd)
     }
   }
   return strMessage;
+}
+
+void Socket::Close()
+{
+  close(m_iSocketFd);
 }

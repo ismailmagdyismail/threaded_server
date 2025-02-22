@@ -9,13 +9,14 @@ set(src_path $ENV{src_path})
 set(bin_path $ENV{bin_path})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${bin_path})
 
-include_directories(${src_path}/sockets)
+include_directories(${src_path}/lib)
 
 add_library(
   sockets
-  ${src_path}/sockets/PassiveSocket.cpp
-  ${src_path}/sockets/ActiveSocket.cpp
-  ${src_path}/sockets/Socket.cpp
+  ${src_path}/lib/PassiveSocket.cpp
+  ${src_path}/lib/ActiveSocket.cpp
+  ${src_path}/lib/Socket.cpp
+  ${src_path}/lib/SocketReceptionThread.cpp
 )
 
-target_include_directories(sockets PUBLIC ${src_path}/sockets)
+target_include_directories(sockets PUBLIC ${src_path}/lib)

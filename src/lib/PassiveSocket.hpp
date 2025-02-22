@@ -4,6 +4,7 @@
 #include "ActiveSocket.hpp"
 
 #include <iostream>
+#include <memory>
 
 class PassiveSocket
 {
@@ -11,7 +12,7 @@ public:
 	PassiveSocket(uint16_t p_ui16PortNumber, int p_iMaxNumberOfConnections);
 	~PassiveSocket();
 
-	ActiveSocket Accept();
+	std::shared_ptr<ActiveSocket> Accept();
 	void Close();
 
 private:

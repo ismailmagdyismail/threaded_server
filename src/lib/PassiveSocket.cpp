@@ -45,17 +45,17 @@ bool PassiveSocket::Listen()
 	return (-1 != ierrorCode);
 }
 
-ActiveSocket PassiveSocket::Accept()
+std::shared_ptr<ActiveSocket> PassiveSocket::Accept()
 {
 	sockaddr_in clientAddress;
 	uint32_t ui32Size = sizeof(clientAddress);
 	int iClientFd = accept(m_oSocket.m_iSocketFd, (sockaddr *)&clientAddress, &ui32Size);
-	return ActiveSocket(iClientFd);
+	return std::make_shared<ActiveSocket>(iClientFd);
 }
 
 void PassiveSocket::Close()
 {
-	close(m_oSocket.m_iSocketFd);
+	m_oSocket.Close();
 }
 
 PassiveSocket::~PassiveSocket()

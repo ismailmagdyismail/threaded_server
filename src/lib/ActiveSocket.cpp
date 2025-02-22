@@ -42,7 +42,7 @@ std::string ActiveSocket::Recieve()
 
 void ActiveSocket::Close()
 {
-  close(m_oSocket.m_iSocketFd);
+  m_oSocket.Close();
 }
 
 ActiveSocket::~ActiveSocket()

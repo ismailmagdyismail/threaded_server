@@ -11,11 +11,7 @@ int portNumber = stoi(SERVER_PORT_NUMBER_ENV);
 
 int main()
 {
-  std::cout << "Client thread " << std::endl;
   ActiveSocket socket;
   bool connectionStatus = socket.Connect(portNumber, "localhost");
   std::cout << "Client connection status " << connectionStatus << std::endl;
-  socket.Send("This a message from the client");
-  std::string message = socket.Recieve();
-  std::cout << "[Client]: Recieved " << message << std::endl;
 }
