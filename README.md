@@ -5,12 +5,12 @@
 
 # How to build and Run
 
-## building all sub projects
+## Building all sub projects
 
 - source enviroment to make sure all enviroment variables and utility functions are defined `source env.bash`
 - buildAll : `build`
 
-## building a specifc project
+## Building a specifc project
 
 - buildLib (common files used by both client and server) : `build_lib`
 - buildClient (common files used by both client and server) : `build_client`
