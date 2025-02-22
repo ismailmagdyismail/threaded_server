@@ -2,12 +2,12 @@
 
 #include "Socket.hpp"
 
-class ClientSocket
+class ActiveSocket
 {
 public:
-	ClientSocket(int p_iSocketFd);
-	ClientSocket();
-	~ClientSocket();
+	ActiveSocket(int p_iSocketFd);
+	ActiveSocket();
+	~ActiveSocket();
 
 	void Send(const std::string &message);
 	std::string Recieve();

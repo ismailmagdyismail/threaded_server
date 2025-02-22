@@ -1,5 +1,5 @@
-//! ClientSocket Wrapper
-#include "ClientSocket.hpp"
+//! ActiveSocket Wrapper
+#include "ActiveSocket.hpp"
 #include "Socket.hpp"
 
 #include <sys/socket.h>
@@ -10,17 +10,17 @@
 
 #define TCP 0
 
-ClientSocket::ClientSocket()
+ActiveSocket::ActiveSocket()
 {
   m_oSocket.m_iSocketFd = socket(AF_INET, SOCK_STREAM, TCP);
 }
 
-ClientSocket::ClientSocket(int p_iSocketFd)
+ActiveSocket::ActiveSocket(int p_iSocketFd)
 {
   m_oSocket.m_iSocketFd = p_iSocketFd;
 }
 
-bool ClientSocket::Connect(int p_iPortNumber, const char *p_pIPAddress)
+bool ActiveSocket::Connect(int p_iPortNumber, const char *p_pIPAddress)
 {
   sockaddr_in address;
   address.sin_family = AF_INET;
@@ -30,22 +30,22 @@ bool ClientSocket::Connect(int p_iPortNumber, const char *p_pIPAddress)
   return (-1 != iStatus);
 }
 
-void ClientSocket::Send(const std::string &message)
+void ActiveSocket::Send(const std::string &message)
 {
   m_oSocket.Send(m_oSocket.m_iSocketFd, message);
 }
 
-std::string ClientSocket::Recieve()
+std::string ActiveSocket::Recieve()
 {
   return m_oSocket.Recieve(m_oSocket.m_iSocketFd);
 }
 
-void ClientSocket::Close()
+void ActiveSocket::Close()
 {
   close(m_oSocket.m_iSocketFd);
 }
 
-ClientSocket::~ClientSocket()
+ActiveSocket::~ActiveSocket()
 {
   Close();
 }

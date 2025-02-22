@@ -1,7 +1,7 @@
 
 
-//! ServerSocket Wrapper
-#include "ServerSocket.hpp"
+//! PassiveSocket Wrapper
+#include "PassiveSocket.hpp"
 
 //! socket
 #include <sys/socket.h>
@@ -10,7 +10,7 @@
 
 #define TCP 0
 
-ServerSocket::ServerSocket(uint16_t p_ui16PortNumber, int p_iMaxConnections) : m_ui16PortNumber(p_ui16PortNumber), m_iMaxConnections(p_iMaxConnections)
+PassiveSocket::PassiveSocket(uint16_t p_ui16PortNumber, int p_iMaxConnections) : m_ui16PortNumber(p_ui16PortNumber), m_iMaxConnections(p_iMaxConnections)
 {
 	m_oSocket.m_iSocketFd = socket(AF_INET, SOCK_STREAM, TCP);
 	if (-1 == m_oSocket.m_iSocketFd)
@@ -29,7 +29,7 @@ ServerSocket::ServerSocket(uint16_t p_ui16PortNumber, int p_iMaxConnections) : m
 	}
 }
 
-bool ServerSocket::Bind()
+bool PassiveSocket::Bind()
 {
 	sockaddr_in address;
 	address.sin_family = AF_INET;
@@ -39,36 +39,26 @@ bool ServerSocket::Bind()
 	return (-1 != errorCode);
 }
 
-bool ServerSocket::Listen()
+bool PassiveSocket::Listen()
 {
 	int ierrorCode = listen(m_oSocket.m_iSocketFd, m_iMaxConnections);
 	return (-1 != ierrorCode);
 }
 
-int ServerSocket::Accept()
+ActiveSocket PassiveSocket::Accept()
 {
 	sockaddr_in clientAddress;
 	uint32_t ui32Size = sizeof(clientAddress);
 	int iClientFd = accept(m_oSocket.m_iSocketFd, (sockaddr *)&clientAddress, &ui32Size);
-	return iClientFd;
+	return ActiveSocket(iClientFd);
 }
 
-void ServerSocket::Send(int p_iSocketFd, const std::string &message)
-{
-	m_oSocket.Send(p_iSocketFd, message);
-}
-
-std::string ServerSocket::Recieve(int p_iSocketFd)
-{
-	return m_oSocket.Recieve(p_iSocketFd);
-}
-
-void ServerSocket::Close()
+void PassiveSocket::Close()
 {
 	close(m_oSocket.m_iSocketFd);
 }
 
-ServerSocket::~ServerSocket()
+PassiveSocket::~PassiveSocket()
 {
 	Close();
 }

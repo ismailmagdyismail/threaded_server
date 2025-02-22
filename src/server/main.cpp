@@ -3,16 +3,17 @@
 #include <string>
 
 //! sockets
-#include "ServerSocket.hpp"
-#include "ClientSocket.hpp"
+#include "PassiveSocket.hpp"
+#include "ActiveSocket.hpp"
 
 std::string SERVER_PORT_NUMBER_ENV = getenv("SERVER_PORT_NUMBER");
-int portNumber = 8080;
+int portNumber = stoi(SERVER_PORT_NUMBER_ENV);
 
 int main()
 {
-  ServerSocket socket(portNumber, -1);
-  int clientFd = socket.Accept();
-  std::string messageRecieved = socket.Recieve(clientFd);
-  std::cout << "Server Recieved this message " << messageRecieved << std::endl;
+  PassiveSocket socket(portNumber, -1);
+  ActiveSocket newConnection = socket.Accept();
+  std::string messageRecieved = newConnection.Recieve();
+  std::cout << "[Server]: Recieved this message " << messageRecieved << std::endl;
+  newConnection.Send("Server ack message");
 }

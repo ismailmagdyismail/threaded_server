@@ -13,8 +13,8 @@ include_directories(${src_path}/sockets)
 
 add_library(
   sockets
-  ${src_path}/sockets/ServerSocket.cpp
-  ${src_path}/sockets/ClientSocket.cpp
+  ${src_path}/sockets/PassiveSocket.cpp
+  ${src_path}/sockets/ActiveSocket.cpp
   ${src_path}/sockets/Socket.cpp
 )
 
