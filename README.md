@@ -5,9 +5,13 @@
 
 # How to build and Run
 
+## Enviroment
+
+- Must source enviroment before running
+- source enviroment to make sure all enviroment variables and utility functions are defined `source env.bash`
+
 ## Building all sub projects
 
-- source enviroment to make sure all enviroment variables and utility functions are defined `source env.bash`
 - buildAll : `build`
 
 ## Building a specifc project
