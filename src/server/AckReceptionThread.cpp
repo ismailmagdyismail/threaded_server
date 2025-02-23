@@ -1,17 +1,19 @@
+#include <unistd.h>
+
 #include "AckReceptionThread.hpp"
 
-AckReceptionThread::AckReceptionThread(uint16_t p_ui16PortNumber, ThreadPool &p_oThreadPool)
-    : ReceptionThread(p_ui16PortNumber),
+AckReceptionThread::AckReceptionThread(uint16_t p_ui16PortNumber, std::string &&p_strSocketName, ThreadPool &p_oThreadPool)
+    : ReceptionThread(p_ui16PortNumber, std::move(p_strSocketName)),
       m_oThreadPool(p_oThreadPool)
 {
 }
 
 void AckReceptionThread::ProcessConnection(std::shared_ptr<ActiveSocket> &p_pConnection)
 {
-  std::cout << "About to handle connection " << std::endl;
-  std::function<void(void)> worker = [this]()
+  std::function<void(void)> worker = [this, p_pConnection]()
   {
-    std::cout << "Handling connection\n";
+    sleep(5); //! Simulate processing
+    p_pConnection->Send("Server, Ack Message");
   };
   m_oThreadPool.AddTask(worker);
 }

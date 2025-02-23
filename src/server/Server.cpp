@@ -3,8 +3,8 @@
 
 #include "Server.hpp"
 
-std::string SERVER_PORT_NUMBER_ENV = getenv("SERVER_PORT_NUMBER");
-int portNumber = stoi(SERVER_PORT_NUMBER_ENV);
+std::string ACK_PORT_NUMBER = getenv("ACK_PORT_NUMBER");
+int ackPortNumber = stoi(ACK_PORT_NUMBER);
 
 std::shared_ptr<Server> Server::Instance()
 {
@@ -12,7 +12,7 @@ std::shared_ptr<Server> Server::Instance()
   return g_pServer;
 }
 
-Server::Server() : m_oServerStatusReceptionThread(portNumber, m_oThreadPool)
+Server::Server() : m_oServerStatusReceptionThread(ackPortNumber, "Status", m_oThreadPool)
 {
 }
 

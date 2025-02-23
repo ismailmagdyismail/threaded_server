@@ -8,7 +8,7 @@
 class ReceptionThread
 {
 public:
-  ReceptionThread(uint32_t p_ui32PortNumber);
+  ReceptionThread(uint32_t p_ui32PortNumber, std::string &&p_strSocketName);
   virtual ~ReceptionThread() = default;
 
   void Start();
@@ -19,6 +19,7 @@ protected:
   virtual void ProcessConnection(std::shared_ptr<ActiveSocket> &p_pConnection) = 0;
 
 private:
+  std::string m_strSocketName;
   Thread m_oThread;
   PassiveSocket m_oSocket;
 };
