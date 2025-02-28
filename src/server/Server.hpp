@@ -7,7 +7,7 @@
 
 #include "PassiveSocket.hpp"
 #include "AckReceptionThread.hpp"
-
+#include "ConnectionsManager.hpp"
 class Server
 {
 public:
@@ -22,4 +22,5 @@ private:
   AckReceptionThread m_oServerStatusReceptionThread;
   std::atomic<bool> m_bIsRunning{false};
   ThreadPool m_oThreadPool;
+  ConnectionsManager m_oConnectionsManager;
 };
