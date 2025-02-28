@@ -14,6 +14,7 @@ export bin_path=$working_dir/$bin_dir
 export build_type=debug
 
 export ACK_PORT_NUMBER=8080
+export STATUS_PORT_NUMBER=8081
 
 
 function build_lib()

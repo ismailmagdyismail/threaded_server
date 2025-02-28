@@ -18,6 +18,25 @@ public:
     return iNextId;
   }
 
+  bool IsRegistered(int p_iID)
+  {
+    std::lock_guard<std::mutex> lock{m_oRegisteredConnectionsMutex};
+    return m_oRegisteredConnections.find(p_iID) != m_oRegisteredConnections.end();
+  }
+
+  std::vector<int> GetAvailableConnections()
+  {
+    std::lock_guard<std::mutex> lock{m_oRegisteredConnectionsMutex};
+    std::vector<int> vRegisteredConnections(m_oRegisteredConnections.size());
+    int i = 0;
+    for (auto &connection : m_oRegisteredConnections)
+    {
+      vRegisteredConnections[i] = connection.first; //! id;
+      i++;
+    }
+    return vRegisteredConnections;
+  }
+
 private:
   int GetNextId()
   {

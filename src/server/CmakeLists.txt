@@ -18,6 +18,7 @@ add_executable(
   ${src_path}/server/Server.cpp
   ${src_path}/server/ReceptionThread.cpp
   ${src_path}/server/AckReceptionThread.cpp
+  ${src_path}/server/ServerStatusThread.cpp
 )
 
 target_link_libraries(SERVER PUBLIC ${bin_path}/libsockets.a)
